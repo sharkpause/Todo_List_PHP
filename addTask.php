@@ -1,11 +1,10 @@
 <?php
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-
 	require('./connect.php');
 	
 	if(!$conn) {
-	  die('Connection failed: ' . $conn->connect_error);
+	 	die('Connection failed: ' . $conn->connect_error);
 	}
 	
 	if(isset($_POST['task'])) {
