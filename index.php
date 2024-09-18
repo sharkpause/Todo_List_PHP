@@ -63,7 +63,30 @@
               <td>' . $row['name'] . '</td>
               <td>' . $doneStatus . '</td> <td>'
               . $doneStatusButton .
-              '</td> <td> <button class="btn btn-primary"> Edit  </button> </td>
+              '</td>
+              <td>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#editModal"> Edit  </button>
+                
+                <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        New task: <input type="text" id="newTaskInput" data-row-id="' . $row['id'] . '">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="submitEditButton">Submit edit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
               <td> <button class="btn btn-danger delete-button" id="' . $row['id'] . '">  Delete  </button> </td>
             </tr>';
     }
