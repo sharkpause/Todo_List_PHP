@@ -39,8 +39,9 @@
     $tasks = mysqli_query($conn , $sql);
   
     while($row = mysqli_fetch_assoc($tasks)) {
+      $id = $row['id'];
+
       $done;
-      
       if($row['done'] === 0) $done = 'FALSE';
       else $done = 'TRUE';
 
@@ -53,47 +54,47 @@
 
       $doneStatusButton;
       if($doneStatus === 'False') {
-        $doneStatusButton = '<button class="btn btn-success mark-done-button" id="' . $row['id'] . '"> Mark done </button>';
+        $doneStatusButton = '<button class="btn btn-success mark-done-button" id="' . $id . '"> Mark done </button>';
       } else if($doneStatus === 'True') {
-        $doneStatusButton = '<button class="btn btn-warning mark-not-done-button" id="' . $row['id'] . '"> Mark not done </button>';
+        $doneStatusButton = '<button class="btn btn-warning mark-not-done-button" id="' . $id . '"> Mark not done </button>';
       }
-  
+
       echo '<tr>
-              <th scope="row" id=' . $row['id'] . '>' . $row['id'] . '</th>
+              <th scope="row" id=' . $id . '>' . $id . '</th>
               <td>' . $row['name'] . '</td>
               <td>' . $doneStatus . '</td> <td>'
               . $doneStatusButton .
               '</td>
               <td>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#editModal"> Edit  </button>
-                
-                <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        New task: <input type="text" id="newTaskInput" data-row-id="' . $row['id'] . '">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" id="submitEditButton">Submit edit</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <button class="btn btn-primary edit-task-button" data-toggle="modal" data-target="#editModal" id="' . $id . '"> Edit  </button>
               </td>
-              <td> <button class="btn btn-danger delete-button" id="' . $row['id'] . '">  Delete  </button> </td>
+              <td> <button class="btn btn-danger delete-button" id="' . $id . '">  Delete  </button> </td>
             </tr>';
     }
   ?>
 
   </tbody>
   </table>
+
+  <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit task</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          New task: <input type="text" class="new-task-input">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary submit-edit-button">Submit edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 	<form id="form" method="POST" action="./addTask.php">
     Task: <input type="text" name="task">

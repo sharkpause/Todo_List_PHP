@@ -1,6 +1,5 @@
 <?php
 
-
 if($_SERVER['REQUEST_METHOD'] === 'PUT') {
 	require('connect.php');
 
@@ -13,13 +12,15 @@ if($_SERVER['REQUEST_METHOD'] === 'PUT') {
 	$newTask = $payload['newTask'];
 
 	$sql = "UPDATE tasks SET name = '$newTask' WHERE id = $taskID";
-
+	
 	$query = mysqli_query($conn, $sql);
 	if($query) {
 		header('Location: ./index.php');
 	} else {
 		echo 'Error while attempting the SQL query ' . $sql;
 	}
+
+	mysqli_close($conn);
 }
 
 ?>

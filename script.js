@@ -15,22 +15,6 @@ for(let i = 0; i < deleteButtons.length; ++i) {
 	});
 }
 
-
-//const markDoneButtons = document.querySelectorAll('.mark-done-button');
-//
-//for(let i = 0; i < markDoneButtons.length; ++i) {
-//	markDoneButtons[i].addEventListener('click', )
-//}
-
-//$(".mark-done-button").on('click', async () => {
-//	try {
-//		const response = await axios.put(MARK_DONE_API_URL, { done: 1, id:  });
-//		location.reload();
-//	} catch(err) {
-//		console.log(err);
-//	}
-//})
-
 $(document).ready(e => {
 	$('.mark-done-button').on('click', async function() {
 		try {
@@ -50,12 +34,15 @@ $(document).ready(e => {
 		}
 	})
 
-	$('#submitEditButton').on('click', async function() {
-		try {
-			const response = await axios.put(EDIT_API_URL, { newTask: $('#newTaskInput').val(), id: $('#newTaskInput').attr('data-row-id') });
-			location.reload();
-		} catch(err) {
-			console.log(err);
-		}
+	$('.edit-task-button').on('click', async function() {
+		$id = $(this).attr('id');
+		$('.submit-edit-button').on('click', async function() {
+			try {
+				const response = await axios.put(EDIT_API_URL, { newTask: $('.new-task-input').val(), id: $id });
+				location.reload();
+			} catch(err) {
+				console.log(err);
+			}
+		})
 	})
 })
