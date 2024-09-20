@@ -18,7 +18,7 @@ for(let i = 0; i < deleteButtons.length; ++i) {
 $(document).ready(e => {
 	$('.mark-done-button').on('click', async function() {
 		try {
-			const response = await axios.put(MARK_DONE_API_URL, { done: 1, id: $(this).attr('id') });
+			const response = await axios.put(MARK_DONE_API_URL, { id: $(this).attr('id') });
 			location.reload();
 		} catch(err) {
 			console.log(err);
@@ -27,7 +27,7 @@ $(document).ready(e => {
 
 	$('.mark-not-done-button').on('click', async function() {
 		try {
-			const response = await axios.put(MARK_NOT_DONE_API_URL, { done: 0, id: $(this).attr('id') });
+			const response = await axios.put(MARK_NOT_DONE_API_URL, { id: $(this).attr('id') });
 			location.reload();
 		} catch(err) {
 			console.log(err);
